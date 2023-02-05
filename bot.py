@@ -2,9 +2,9 @@ from telethon.sync import TelegramClient
 import pandas
 import pretty_html_table
 # Your api_id
-app_api_id = 21430622
+app_api_id = 12345
 # Your api_hash
-app_api_hash = "4daa433df2fa1435e626c7f15897d328"
+app_api_hash = "Your api_hash"
 telegram_client = TelegramClient("parser_bot", app_api_id, app_api_hash)
 telegram_client.start()
 def get_participants_from_chat(limit):
