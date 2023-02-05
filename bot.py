@@ -2,9 +2,9 @@ from telethon.sync import TelegramClient
 import pandas
 import pretty_html_table
 # Your api_id
-app_api_id = 123456
+app_api_id = 21430622
 # Your api_hash
-app_api_hash = "Your api_hash"
+app_api_hash = "4daa433df2fa1435e626c7f15897d328"
 telegram_client = TelegramClient("parser_bot", app_api_id, app_api_hash)
 telegram_client.start()
 def get_participants_from_chat(limit):
@@ -21,7 +21,7 @@ def get_participants_from_chat(limit):
 
     ask = int(input("Из какого паблика хотите получить пользователей?: "))
     all_members_with_limit = [i for i in telegram_client.iter_participants(entity=all_channels[ask], limit=limit)]
-    members_data = {'id': [],'username': [], 'firstname': [], 'group': []}
+    members_data = {'id': [], 'username': [], 'firstname': [], 'group': []}
     counter = 1
     for member in all_members_with_limit:
         members_data['id'].append(counter)
@@ -115,7 +115,7 @@ def parse_channel_by_stopwords(limit, words):
     try:
         for i in all_messages_with_limit:
             for k in stop_words:
-                if k in i.message:
+                if k.lower() in i.message.lower():
                     result_messages.append(i)
                     messages_data["Id"].append(counter)
                     messages_data["Group"].append(all_channels[ask].name)
@@ -134,7 +134,7 @@ def parse_channel_by_stopwords(limit, words):
 
 
 # print(parse_channel(50))
-get_participants_from_chat(500)
+# get_participants_from_chat(50)
 # get_participants_from_all_possible_chats(50)
 # parse_channel_by_stopwords(1000, 'я')
 
