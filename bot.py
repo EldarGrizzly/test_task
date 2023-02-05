@@ -5,7 +5,7 @@ import pretty_html_table
 app_api_id = 123456
 # Your api_hash
 app_api_hash = "Your api_hash"
-
+print(123)
 telegram_client = TelegramClient("parser_bot", app_api_id, app_api_hash)
 telegram_client.start()
 def get_participants_from_chat(limit):
@@ -23,16 +23,13 @@ def get_participants_from_chat(limit):
     ask = int(input("Из какого паблика хотите получить пользователей?: "))
     all_members_with_limit = [i for i in telegram_client.iter_participants(entity=all_channels[ask], limit=limit)]
     members_data = {'id': [],'username': [], 'firstname': [], 'group': []}
-    with open('data.txt', 'w', encoding= 'utf-8') as data:
-        data.write('username'+' firstname'+' group'+'\n')
-        counter = 1
-        for member in all_members_with_limit:
-            data.write(f'{counter}: {member.username} {member.first_name} "{all_channels[ask].title}" \n')
-            members_data['id'].append(counter)
-            members_data['username'].append(member.username)
-            members_data['firstname'].append(member.first_name)
-            members_data['group'].append(all_channels[ask].title)
-            counter+=1
+    counter = 1
+    for member in all_members_with_limit:
+        members_data['id'].append(counter)
+        members_data['username'].append(member.username)
+        members_data['firstname'].append(member.first_name)
+        members_data['group'].append(all_channels[ask].title)
+        counter+=1
     with open('index.html', 'w', encoding='utf-8') as html:
         html.write(pretty_html_table.build_table(pandas.DataFrame.from_dict(members_data), 'orange_dark'))
         print('The result is saved in index.html')
@@ -137,8 +134,8 @@ def parse_channel_by_stopwords(limit, words):
     return result_messages
 
 
-print(parse_channel(50))
-# get_participants_from_chat(500)
+# print(parse_channel(50))
+get_participants_from_chat(500)
 # get_participants_from_all_possible_chats(50)
 # parse_channel_by_stopwords(1000, 'я')
 
