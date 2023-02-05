@@ -5,7 +5,6 @@ import pretty_html_table
 app_api_id = 123456
 # Your api_hash
 app_api_hash = "Your api_hash"
-print(123)
 telegram_client = TelegramClient("parser_bot", app_api_id, app_api_hash)
 telegram_client.start()
 def get_participants_from_chat(limit):
